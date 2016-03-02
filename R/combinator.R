@@ -1,0 +1,23 @@
+# combinator.R
+
+combinator <- function(str, parser) {
+  str <- if (class(str) != "combinator") {
+    list(i = str)
+  } else {
+    str
+  }
+  output <- parser(str$i)
+  remaining <- str_replace(str$i, coll(output), '')
+  return(structure(list(i = remaining, o = output), class = "combinator"))
+}
+
+`%C>%` <- function(lhs, rhs) {
+  lhs %>% combinator(rhs)
+}
+
+`%:>%` <- function(lhs, rhs) {
+  currentEnv = parent.env(environment())
+  lhs %T>% {
+    assign(rhs, .$o, envir = currentEnv)
+  }
+}
