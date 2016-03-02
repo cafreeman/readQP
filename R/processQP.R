@@ -4,6 +4,16 @@
 #' @importFrom stringr str_extract str_replace regex coll
 #' @importFrom Rglpk Rglpk_read_file
 
+#' @export
+processQP <- function(modelPath, type = "CPLEX_LP") {
+  # Read the original CPLEX file as a string
+  file <- readQP(modelPath)
+  comps <- getModelComponents(file)
+  tmp.path <- rebuildLP(comps)
+  tmp.model <- Rglpk_read_file(tmp.path, type = type)
+  parseQ(tmp.model, comps$qp_obj)
+}
+
 getRemainder <- function(file) {
   str_extract(file, regex("Subject To.+$", dotall = TRUE))
 }
@@ -41,14 +51,4 @@ rebuildLP <- function(comps) {
   tmpFile <- tempfile("tmp_lp", fileext = ".lp")
   writeLines(tmpContents, tmpFile)
   return(tmpFile)
-}
-
-#' @export
-processQP <- function(modelPath, type = "CPLEX_LP") {
-  # Read the original CPLEX file as a string
-  file <- readQP(modelPath)
-  comps <- getModelComponents(file)
-  tmp.path <- rebuildLP(comps)
-  tmp.model <- Rglpk::Rglpk_read_file(tmp.path, type = type)
-  parseQ(tmp.model, comps$qp_obj)
 }
