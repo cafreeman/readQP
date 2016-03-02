@@ -1,5 +1,8 @@
 # combinator.R
 
+#' @importFrom magrittr %>% %T>%
+#' @importFrom stringr str_replace
+
 combinator <- function(str, parser) {
   str <- if (class(str) != "combinator") {
     list(i = str)

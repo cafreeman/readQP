@@ -1,5 +1,8 @@
 # parsers.R
 
+#' @importFrom magrittr %>%
+#' @importFrom stringr str_replace_all str_extract
+
 remove_newLines <- function(str) {
   str_replace_all(str, '\\n', '')
 }

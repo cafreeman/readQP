@@ -1,5 +1,9 @@
 # processQP.R
 
+#' @importFrom magrittr %>% %T>%
+#' @importFrom stringr str_extract str_replace regex coll
+#' @importFrom Rglpk Rglpk_read_file
+
 getRemainder <- function(file) {
   str_extract(file, regex("Subject To.+$", dotall = TRUE))
 }
