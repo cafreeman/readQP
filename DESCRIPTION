@@ -11,3 +11,4 @@ Imports:
     stringr,
     Rglpk
 RoxygenNote: 5.0.1
+Suggests: testthat
