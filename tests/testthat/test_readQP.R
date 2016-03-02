@@ -1,5 +1,3 @@
-library(readQP)
-
 context("read CPLEX QP files")
 
 test_that("read a CPLEX file successfully", {
