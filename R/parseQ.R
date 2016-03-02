@@ -32,7 +32,7 @@ getCoefNames <- function(tokenMatrix) {
 
 # Create a long matrix of variable pairs and coefficients
 createVarPairs <- function(varList, coefs) {
-  varMat <- expand.grid(x1 = varList, x2 = varList)
+  varMat <- expand.grid(x1 = varList, x2 = varList, stringsAsFactors = FALSE)
   varMat$x3 <- ifelse(
     varMat$x1 == varMat$x2,
     paste0(varMat$x1, "^2"),
