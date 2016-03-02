@@ -2,3 +2,13 @@
 
 export(processQP)
 export(readQP)
+importFrom(Rglpk,Rglpk_read_file)
+importFrom(magrittr,"%>%")
+importFrom(magrittr,"%T>%")
+importFrom(stringr,coll)
+importFrom(stringr,regex)
+importFrom(stringr,str_extract)
+importFrom(stringr,str_match)
+importFrom(stringr,str_replace)
+importFrom(stringr,str_replace_all)
+importFrom(stringr,str_split)
