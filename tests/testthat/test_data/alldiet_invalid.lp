@@ -3,6 +3,7 @@ Minimize
  + 0.47 P.towels + 1.49 !SUGARS! + 1.27 cereal + 3.29 SixPackX + 3.29 SixPackY
 Subject To
  aluminum: 137 pizza + 71.4 SixPackX + 71.4 SixPackY >= 27230
+ Vacuous:  >= 0
  RED#2:    1.9 pizza + 18 M.cherry + 1.9 P.towels + 1.6 !SUGARS! + 1.6 cereal
         + 1.7 SixPackX + 1.7 SixPackY - RgRED#2 = 18390
  salt:       67.2 pizza + 36 FRFries + 2.6 M.cherry + 3.4 P.towels + 4.3 !SUGARS!
