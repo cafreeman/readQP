@@ -1,4 +1,4 @@
-#' @importFrom slam simple_triplet_matrix
+#' @importFrom slam as.simple_triplet_matrix
 
 #' @export
 createQMatrix <- function(coefs) {
