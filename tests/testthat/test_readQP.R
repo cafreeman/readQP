@@ -6,3 +6,8 @@ test_that("read a CPLEX file successfully", {
   file <- readQP(test_path)
   expect_equal(file, "Minimize\nobj: a + b + [ a^2 + 4 a * b + 7 b^2 ]/2\nSubject To\nc1: a + b >= 10\nEnd\n")
 })
+
+test_that("error when the user doesn't point to a CPLEX file", {
+  test_path <- getSampleData("non_CPLEX.txt", TRUE)
+  expect_error(readQP(test_path), "You must use a CPLEX LP model file \\(ending in '.lp'\\)")
+})

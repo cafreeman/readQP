@@ -8,6 +8,13 @@ expected <- data.frame(
   stringsAsFactors = FALSE
   )
 
+test_that("processQP correctly short-circuits when it encounters a model without a quadratic piece", {
+  test_path <- getSampleData("lp_example", TRUE)
+  expect_message(processQP(test_path), "^No quadratic elements detected\\. .+$")
+  result <- suppressMessages(processQP(test_path))
+  expect_is(result, c("MP_data_from_file", "MILP"))
+})
+
 test_that("processQP can read model a file and return the Q components", {
   test_path <- getSampleData("simple_qp", TRUE)
   # test_path <- normalizePath("./test_data/simple_qp.lp")
