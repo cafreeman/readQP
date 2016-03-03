@@ -1,0 +1,22 @@
+#' @importFrom stringr str_detect
+
+listSampleData <- function() {
+  path <- file.path(getwd(), "tests", "testthat", "test_data")
+  list.files(path)
+}
+
+getSampleData <- function(name) {
+  if (!str_detect(name, "^.+\\.lp$")) {
+    name <- paste0(name, ".lp")
+  }
+  path <- file.path(getwd(), "tests", "testthat", "test_data", name)
+  if (!file.exists(path)) {
+    msg <- paste(
+      "The file you have requested does not exist.",
+      "  Maybe you were looking for one these instead?",
+      paste("\t", listSampleData(), collapse = "\n"),
+      sep = "\n")
+    stop(msg)
+  }
+  return(path)
+}
