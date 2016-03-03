@@ -1,4 +1,4 @@
-context("Create Q matrix a coefficient mapping")
+context("Create Q matrix from a coefficient mapping")
 
 test_that("createQMatrix works with a basic example", {
   expected <- as.simple_triplet_matrix(matrix(c(1, 2, 2, 7), nrow = 2, ncol = 2))

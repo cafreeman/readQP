@@ -6,7 +6,7 @@ expected <- data.frame(
   x3 = c("a^2", "b*a", "a*b", "b^2"),
   values = c("1", NA, "+4", "+7"),
   stringsAsFactors = FALSE
-  )
+)
 
 test_that("processQP correctly short-circuits when it encounters a model without a quadratic piece", {
   test_path <- getSampleData("lp_example", TRUE)
@@ -17,7 +17,6 @@ test_that("processQP correctly short-circuits when it encounters a model without
 
 test_that("processQP can read model a file and return the Q components", {
   test_path <- getSampleData("simple_qp", TRUE)
-  # test_path <- normalizePath("./test_data/simple_qp.lp")
   result <- processQP(test_path)
   expect_is(result, "data.frame")
   expect_equal(length(result), 4)

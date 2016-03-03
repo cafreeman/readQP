@@ -2,7 +2,13 @@
 
 #' @importFrom stringr str_split str_match
 
-# Take a glpk model object a Q equation and return a long-form DF of variable/coef pairs
+#' @name parseQ
+#' @title Parse a quadratic equation into a matrix of coefficients
+#' @description Take a glpk model object a Q equation and return a long-form DF of variable/coef pairs
+#' @param model An Rglpk model object
+#' @param q A string containting the quadratic portion of a CPLEX constraint
+#' @return A long matrix of variable pairs and their coefficients
+#' @export
 parseQ <- function(model, q) {
   vars <- getVarNames(model)
   terms <- tokenizeQ(q)
