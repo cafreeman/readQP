@@ -9,6 +9,7 @@ LazyData: TRUE
 Imports:
     magrittr,
     stringr,
-    Rglpk
+    Rglpk,
+    slam
 RoxygenNote: 5.0.1
 Suggests: testthat
