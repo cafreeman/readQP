@@ -8,10 +8,24 @@
 processQP <- function(modelPath, type = "CPLEX_LP") {
   # Read the original CPLEX file as a string
   file <- readQP(modelPath)
-  comps <- getModelComponents(file)
-  tmp.path <- rebuildLP(comps)
-  tmp.model <- Rglpk_read_file(tmp.path, type = type)
-  parseQ(tmp.model, comps$qp_obj)
+  if (isQP(file)) {
+    comps <- getModelComponents(file)
+    tmp.path <- rebuildLP(comps)
+    tmp.model <- Rglpk_read_file(tmp.path, type = type)
+    return(parseQ(tmp.model, comps$qp_obj))
+  } else {
+    message("No quadratic elements detected. Defaulting to Rglpk_read_file.\n")
+    return(Rglpk_read_file(modelPath, type = type))
+  }
+}
+
+isQP <- function(file) {
+  file %>%
+    remove_newLines %>%
+    remove_spaces %C>%
+    max_min %C>%
+    get_objective %O>%
+    check_quadratic
 }
 
 getRemainder <- function(file) {

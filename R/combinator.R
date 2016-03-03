@@ -18,6 +18,10 @@ combinator <- function(str, parser) {
   lhs %>% combinator(rhs)
 }
 
+`%O>%` <- function(lhs, rhs) {
+  rhs(lhs$o)
+}
+
 `%:>%` <- function(lhs, rhs) {
   currentEnv = parent.env(environment())
   lhs %T>% {

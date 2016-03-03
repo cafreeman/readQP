@@ -19,6 +19,10 @@ get_objective <- function(str) {
   str_extract(str, "^.+(?=SubjectTo.+$)")
 }
 
+check_quadratic <- function(str) {
+  str_detect(str, "^.+(?=\\[.+\\])")
+}
+
 get_c <- function(str) {
   str_extract(str, "^.+(?=\\[)") %>%
     str_extract("^.+(?=[+-]$)")
