@@ -9,7 +9,8 @@ expected <- data.frame(
   )
 
 test_that("processQP can read model a file and return the Q components", {
-  test_path <- normalizePath("./test_data/simple_qp.lp")
+  test_path <- getSampleData("simple_qp", TRUE)
+  # test_path <- normalizePath("./test_data/simple_qp.lp")
   result <- processQP(test_path)
   expect_is(result, "data.frame")
   expect_equal(length(result), 4)
