@@ -5,11 +5,13 @@ listSampleData <- function() {
   list.files(path)
 }
 
-getSampleData <- function(name) {
+getSampleData <- function(name, isTest = FALSE) {
   if (!str_detect(name, "^.+\\.lp$")) {
     name <- paste0(name, ".lp")
   }
-  path <- file.path(getwd(), "tests", "testthat", "test_data", name)
+  path <- ifelse(isTest,
+                 file.path(getwd(), "test_data", name),
+                 file.path(getwd(), "tests", "testthat", "test_data", name))
   if (!file.exists(path)) {
     msg <- paste(
       "The file you have requested does not exist.",
