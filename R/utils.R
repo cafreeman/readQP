@@ -1,12 +1,16 @@
 #' @importFrom stringr str_detect
 
+isLPFile <- function(filePath) {
+  tools::file_ext(filePath) == "lp"
+}
+
 listSampleData <- function() {
   path <- file.path(getwd(), "tests", "testthat", "test_data")
   list.files(path)
 }
 
 getSampleData <- function(name, isTest = FALSE) {
-  if (!str_detect(name, "^.+\\.lp$")) {
+  if (nchar(tools::file_ext(name)) == 0) {
     name <- paste0(name, ".lp")
   }
   path <- ifelse(isTest,
