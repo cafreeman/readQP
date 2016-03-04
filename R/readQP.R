@@ -1,14 +1,14 @@
 # readQP.R
 
-#' @name readQP
+#' @name readModelFile
 #' @title Convert model files to ROI-compatible model objects
 #' @description Read and parse a CPLEX model file (including quadratic objectives).
 #' @param filePath The path to the model file
 #' @param type File type. Defaults to "CPLEX_LP"
 #' @return An ROI-compatible model object
 #' @export
-readQP <- function(filePath, type = "CPLEX_LP") {
-  file <- readModelFile(filePath)
+readModelFile <- function(filePath, type = "CPLEX_LP") {
+  file <- readCPLEXFile(filePath)
   if (!isQP(file)) {
     message("No quadratic elements detected. Defaulting to Rglpk_read_file.\n")
     return(Rglpk_read_file(filePath, type = type))
@@ -26,7 +26,7 @@ createQPModel <- function(model, qMat) {
   return(model)
 }
 
-readModelFile <- function(filePath) {
+readCPLEXFile <- function(filePath) {
   if (!isLPFile(filePath)) {
     stop("You must use a CPLEX LP model file (ending in '.lp')")
   }

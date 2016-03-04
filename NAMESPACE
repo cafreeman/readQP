@@ -3,7 +3,7 @@
 export(createQMatrix)
 export(parseQ)
 export(processQP)
-export(readQP)
+export(readModelFile)
 importFrom(Rglpk,Rglpk_read_file)
 importFrom(magrittr,"%>%")
 importFrom(magrittr,"%T>%")

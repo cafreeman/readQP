@@ -10,7 +10,7 @@ expected <- data.frame(
 
 test_that("processQP can read model a file and return the Q components", {
   test_path <- getSampleData("simple_qp", TRUE)
-  modelFile <- readModelFile(test_path)
+  modelFile <- readCPLEXFile(test_path)
   list[model, vecMap] <- processQP(modelFile, "CPLEX_LP")
   expect_is(model, c("MP_data_from_file", "MILP"))
   expect_is(vecMap, "data.frame")
