@@ -26,3 +26,16 @@ getSampleData <- function(name, isTest = FALSE) {
   }
   return(path)
 }
+
+# Helper function for destructuring lists/vectors. Helps when dealing with lists as results.
+list <- structure(NA,class="result")
+"[<-.result" <- function(x,...,value) {
+  args <- as.list(match.call())
+  args <- args[-c(1:2,length(args))]
+  length(value) <- length(args)
+  for(i in seq(along=args)) {
+    a <- args[[i]]
+    if(!missing(a)) eval.parent(substitute(a <- v,list(a=a,v=value[[i]])))
+  }
+  x
+}

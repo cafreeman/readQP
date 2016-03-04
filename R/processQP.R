@@ -5,18 +5,12 @@
 #' @importFrom Rglpk Rglpk_read_file
 
 #' @export
-processQP <- function(modelPath, type = "CPLEX_LP") {
-  # Read the original CPLEX file as a string
-  file <- readQP(modelPath)
-  if (isQP(file)) {
-    comps <- getModelComponents(file)
-    tmp.path <- rebuildLP(comps)
-    tmp.model <- Rglpk_read_file(tmp.path, type = type)
-    return(parseQ(tmp.model, comps$qp_obj))
-  } else {
-    message("No quadratic elements detected. Defaulting to Rglpk_read_file.\n")
-    return(Rglpk_read_file(modelPath, type = type))
-  }
+processQP <- function(file, type) {
+  comps <- getModelComponents(file)
+  tmp.path <- rebuildLP(comps)
+  tmp.model <- Rglpk_read_file(tmp.path, type = type)
+  res <- list(model = tmp.model, vecMap = parseQ(tmp.model, comps$qp_obj))
+  return(res)
 }
 
 isQP <- function(file) {
