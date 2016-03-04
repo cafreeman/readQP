@@ -4,7 +4,7 @@
 #' @importFrom stringr str_replace_all str_extract
 
 remove_newLines <- function(str) {
-  str_replace_all(str, '\\n', '')
+  str_replace_all(str, '[\\n\\r\\t]', '')
 }
 
 remove_spaces <- function(str) {

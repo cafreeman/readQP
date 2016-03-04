@@ -19,7 +19,12 @@ isQP <- function(file) {
     remove_spaces %C>%
     max_min %C>%
     get_objective %O>%
-    check_quadratic
+    check_quadratic %>% {
+      if (is.na(.)) {
+        return(FALSE)
+      }
+      return(.)
+    }
 }
 
 getRemainder <- function(file) {
