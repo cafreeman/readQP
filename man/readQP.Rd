@@ -2,17 +2,19 @@
 % Please edit documentation in R/readQP.R
 \name{readQP}
 \alias{readQP}
-\title{Utility for reading model files for parsing}
+\title{Convert model files to ROI-compatible model objects}
 \usage{
-readQP(filePath)
+readQP(filePath, type = "CPLEX_LP")
 }
 \arguments{
 \item{filePath}{The path to the model file}
+
+\item{type}{File type. Defaults to "CPLEX_LP"}
 }
 \value{
-A character string containing the contents of the model file.
+An ROI-compatible model object
 }
 \description{
-Read a CPLEX model file into memory as a character string
+Read and parse a CPLEX model file (including quadratic objectives).
 }
 

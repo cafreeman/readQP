@@ -1,12 +1,22 @@
 # readQP.R
 
 #' @name readQP
-#' @title Utility for reading model files for parsing
-#' @description Read a CPLEX model file into memory as a character string
+#' @title Convert model files to ROI-compatible model objects
+#' @description Read and parse a CPLEX model file (including quadratic objectives).
 #' @param filePath The path to the model file
-#' @return A character string containing the contents of the model file.
+#' @param type File type. Defaults to "CPLEX_LP"
+#' @return An ROI-compatible model object
 #' @export
-readQP <- function(filePath) {
+readQP <- function(filePath, type = "CPLEX_LP") {
+  file <- readModelFile(filePath)
+  if (!isQP(file)) {
+    message("No quadratic elements detected. Defaulting to Rglpk_read_file.\n")
+    return(Rglpk_read_file(filePath, type = type))
+  }
+  list[model, vecMap] <- processQP(file, type)
+  qMat <- createQMatrix(vecMap)
+  return(createQPModel(model, qMat))
+}
 
 # Insert the Q matrix into the model object's `objective` element. model$objective will now have
 # two child elements: c (the original/linear objective) and Q (the quadratic element)
@@ -15,6 +25,8 @@ createQPModel <- function(model, qMat) {
   model$objective <- list(c = c, Q = qMat)
   return(model)
 }
+
+readModelFile <- function(filePath) {
   if (!isLPFile(filePath)) {
     stop("You must use a CPLEX LP model file (ending in '.lp')")
   }

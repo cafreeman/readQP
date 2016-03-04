@@ -8,21 +8,16 @@ expected <- data.frame(
   stringsAsFactors = FALSE
 )
 
-test_that("processQP correctly short-circuits when it encounters a model without a quadratic piece", {
-  test_path <- getSampleData("lp_example", TRUE)
-  expect_message(processQP(test_path), "^No quadratic elements detected\\. .+$")
-  result <- suppressMessages(processQP(test_path))
-  expect_is(result, c("MP_data_from_file", "MILP"))
-})
-
 test_that("processQP can read model a file and return the Q components", {
   test_path <- getSampleData("simple_qp", TRUE)
-  result <- processQP(test_path)
-  expect_is(result, "data.frame")
-  expect_equal(length(result), 4)
-  expect_equal(names(result), c("x1", "x2", "x3", "values"))
-  for (i in names(result)) {
-    expect_equal(result$i, expected$i)
+  modelFile <- readModelFile(test_path)
+  list[model, vecMap] <- processQP(modelFile, "CPLEX_LP")
+  expect_is(model, c("MP_data_from_file", "MILP"))
+  expect_is(vecMap, "data.frame")
+  expect_equal(length(vecMap), 4)
+  expect_equal(names(vecMap), c("x1", "x2", "x3", "values"))
+  for (i in names(vecMap)) {
+    expect_equal(vecMap$i, expected$i)
   }
-  expect_false(all(is.na(result)))
+  expect_false(all(is.na(vecMap)))
 })
