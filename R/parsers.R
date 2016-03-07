@@ -11,6 +11,7 @@ remove_spaces <- function(str) {
   str_replace_all(str, ' ', '')
 }
 
+# Extract the model sense
 max_min <- function(str) {
   str_extract(str, "(?i)(?:min|max)(?:imize)?")
 }
@@ -30,15 +31,18 @@ getRemainder <- function(file) {
   str_extract(file, regex(pattern, dotall = TRUE))
 }
 
+# Checks for the existence of a quadratic component in the objective function
 check_quadratic <- function(str) {
   str_detect(str, "^.+(?=\\[.+\\])")
 }
 
+# Extracts the linear component of the objective function
 get_c <- function(str) {
   str_extract(str, "^.+(?=\\[)") %>%
     str_extract("^.+(?=[+-]$)")
 }
 
+# Extracts the quadratic component of the objective function
 get_Q <- function(str) {
   str_extract(str, "(?<=^[+-]\\[).+(?=\\]/2$)")
 }
