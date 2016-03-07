@@ -6,5 +6,6 @@ ReadQP aims to build on top of that functionality by providing the ability to al
 
 
 ## TO DO:
-  - Handle all variations of the model goal (e.g. max, min, maximize, maximum, upper and lower case etc.)
+  - ~~Handle all variations of the model goal (e.g. max, min, maximize, maximum, upper and lower case etc.)~~
   - Handle all variations of the constraint statement (Subject To, s.t., such that, ST., etc.)
+  - Nested quadratic components in the objective
