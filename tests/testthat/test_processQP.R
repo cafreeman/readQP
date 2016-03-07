@@ -8,6 +8,13 @@ expected <- data.frame(
   stringsAsFactors = FALSE
 )
 
+# utility for generating a vector of different model string variations
+generateModelVariations <- function(model, target, options) {
+  sapply(options, function(option) {
+    str_replace(model, target, option)
+  })
+}
+
 test_that("processQP can read model a file and return the Q components", {
   test_path <- getSampleData("simple_qp", TRUE)
   modelFile <- readCPLEXFile(test_path)
@@ -26,15 +33,9 @@ test_that("processQP can read model a file and return the Q components", {
 test_that("processQP handles all constraint variations correctly", {
   options <- c("such that", "ST.", "s.t.", "sT", "sUbJecT tO")
 
-  generateConstraintVariations <- function(model, options) {
-    sapply(options, function(option) {
-      str_replace(model, "Subject To", option)
-    })
-  }
-
   test_path <- getSampleData("simple_qp", TRUE)
   modelFile <- readCPLEXFile(test_path)
-  testCases <- generateConstraintVariations(modelFile, options)
+  testCases <- generateModelVariations(modelFile, "Subject To", options)
 
   for (case in testCases) {
     list[model, vecMap] <- processQP(case, "CPLEX_LP")
