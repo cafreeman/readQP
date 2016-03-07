@@ -5,7 +5,7 @@ isLPFile <- function(filePath) {
 }
 
 listSampleData <- function() {
-  path <- file.path(package.path("readQP"), "tests", "testthat", "test_data")
+  path <- file.path(path.package("readQP"), "tests", "testthat", "test_data")
   list.files(path)
 }
 
