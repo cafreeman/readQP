@@ -15,8 +15,19 @@ max_min <- function(str) {
   str_extract(str, "(?i)(?:min|max)(?:imize)?")
 }
 
+# Pattern for all possible variations of the constraint section
+constraintPattern <- "(?i)(?:subject\\s?to|such\\s?that|st|s\\.t\\.|st\\.)"
+
+# Returns everything up to the constraint
 get_objective <- function(str) {
-  str_extract(str, "^.+(?=SubjectTo.+$)")
+  pattern <- paste0("^.+(?=", constraintPattern, ".+$)")
+  str_extract(str, pattern)
+}
+
+# Returns everything from the constraint onward
+getRemainder <- function(file) {
+  pattern <- paste0(constraintPattern, ".+$")
+  str_extract(file, regex(pattern, dotall = TRUE))
 }
 
 check_quadratic <- function(str) {

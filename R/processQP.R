@@ -27,10 +27,6 @@ isQP <- function(file) {
     }
 }
 
-getRemainder <- function(file) {
-  str_extract(file, regex("Subject To.+$", dotall = TRUE))
-}
-
 getGoalAndObj <- function(file) {
   res <- list()
   file %>%

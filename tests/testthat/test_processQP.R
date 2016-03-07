@@ -21,3 +21,30 @@ test_that("processQP can read model a file and return the Q components", {
   }
   expect_false(all(is.na(vecMap)))
 })
+
+
+test_that("processQP handles all constraint variations correctly", {
+  options <- c("such that", "ST.", "s.t.", "sT", "sUbJecT tO")
+
+  generateConstraintVariations <- function(model, options) {
+    sapply(options, function(option) {
+      str_replace(model, "Subject To", option)
+    })
+  }
+
+  test_path <- getSampleData("simple_qp", TRUE)
+  modelFile <- readCPLEXFile(test_path)
+  testCases <- generateConstraintVariations(modelFile, options)
+
+  for (case in testCases) {
+    list[model, vecMap] <- processQP(case, "CPLEX_LP")
+    expect_is(model, c("MP_data_from_file", "MILP"))
+    expect_is(vecMap, "data.frame")
+    expect_equal(length(vecMap), 4)
+    expect_equal(names(vecMap), c("x1", "x2", "x3", "values"))
+    for (i in names(vecMap)) {
+      expect_equal(vecMap$i, expected$i)
+    }
+    expect_false(all(is.na(vecMap)))
+  }
+})
