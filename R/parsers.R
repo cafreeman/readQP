@@ -13,7 +13,7 @@ remove_spaces <- function(str) {
 
 # Extract the model sense
 max_min <- function(str) {
-  str_extract(str, "(?i)(?:min|max)(?:imize)?")
+  str_extract(str, "(?i)(?:min|max)(?:imize|imum)?")
 }
 
 # Pattern for all possible variations of the constraint section
