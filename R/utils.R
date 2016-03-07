@@ -5,7 +5,7 @@ isLPFile <- function(filePath) {
 }
 
 listSampleData <- function() {
-  path <- file.path(getwd(), "tests", "testthat", "test_data")
+  path <- file.path(package.path("readQP"), "tests", "testthat", "test_data")
   list.files(path)
 }
 
@@ -15,7 +15,7 @@ getSampleData <- function(name, isTest = FALSE) {
   }
   path <- ifelse(isTest,
                  file.path(getwd(), "test_data", name),
-                 file.path(getwd(), "tests", "testthat", "test_data", name))
+                 file.path(path.package("readQP"), "tests", "testthat", "test_data", name))
   if (!file.exists(path)) {
     msg <- paste(
       "The file you have requested does not exist.",
