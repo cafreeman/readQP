@@ -3,7 +3,7 @@ Type: Package
 Title: Handle Quadratic Programming problems with CPLEX_LP files
 Version: 0.1.0
 Authors@R: person("Chris", "Freeman", email = "cfreeman@alteryx.com", role = c("cre", "aut"))
-Description: Helper functions for reading QP problems from CPLEX files
+Description: Helper functions for reading QP problems from CPLEX files.
 License: MIT + file LICENSE
 LazyData: TRUE
 Imports:

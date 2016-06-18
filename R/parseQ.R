@@ -1,6 +1,7 @@
 # parseQ.R
 
 #' @importFrom stringr str_split str_match
+#' @import stats
 
 #' @name parseQ
 #' @title Parse a quadratic equation into a matrix of coefficients

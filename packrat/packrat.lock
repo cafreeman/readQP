@@ -1,12 +1,17 @@
 PackratFormat: 1.4
-PackratVersion: 0.4.6.1
-RVersion: 3.2.3
+PackratVersion: 0.4.7.13
+RVersion: 3.3.0
 Repos: CRAN=https://cran.rstudio.com/
+
+Package: R6
+Source: CRAN
+Version: 2.1.2
+Hash: c515e41c73294952cbb33ee1c1be5a2d
 
 Package: Rglpk
 Source: CRAN
-Version: 0.6-1
-Hash: e1772b6cd2b0c50f0361e0e8c24dfb4b
+Version: 0.6-2
+Hash: a9a52d002b4b052f99b1f7c40f99f176
 Requires: slam
 
 Package: crayon
@@ -32,9 +37,13 @@ Hash: 56e7087c3559eb7ba72a9afb349bf896
 Requires: digest
 
 Package: packrat
-Source: CRAN
-Version: 0.4.6-1
-Hash: 29eacc43b096c5b1a82c8d54a49b030b
+Source: github
+Version: 0.4.7-13
+Hash: a4984d111a7901198603e556564d26e5
+GithubRepo: packrat
+GithubUsername: rstudio
+GithubRef: master
+GithubSha1: 5747d5468053a4c650e578aeabc1ffbcfe4819b7
 
 Package: praise
 Source: CRAN
@@ -43,13 +52,13 @@ Hash: 77da8f1df873a4b91e5c4a68fe2fb1b6
 
 Package: slam
 Source: CRAN
-Version: 0.1-32
-Hash: bc3501cd4badda02e5be7837847c887d
+Version: 0.1-35
+Hash: 3f2ce71f0bb3247f5c3b74246db028ce
 
 Package: stringi
 Source: CRAN
-Version: 1.0-1
-Hash: cf342bc407bd5daec77ed1009d5244e1
+Version: 1.1.1
+Hash: 48f2afc5dfecb65ba32a87d38b3533ff
 
 Package: stringr
 Source: CRAN
@@ -61,4 +70,4 @@ Package: testthat
 Source: CRAN
 Version: 0.11.0
 Hash: e10882241e569f584fb1f8c19599a13f
-Requires: crayon, digest, praise
+Requires: R6, digest, magrittr, praise, crayon
